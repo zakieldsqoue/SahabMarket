@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CatID" />
+    </Key>
+    <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateUserID" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiyUserID" Type="Int32" />
+    <Property Name="ModifiyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Item" Relationship="TaskDBModel.FK_Item_Categories" FromRole="Categories" ToRole="Item" />
+  </EntityType>
+  <EntityType Name="OrderItems">
+    <Key>
+      <PropertyRef Name="OrderItemID" />
+    </Key>
+    <Property Name="OrderItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <Property Name="ItemID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="29" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Item" Relationship="TaskDBModel.FK_OrderItems_Item" FromRole="OrderItems" ToRole="Item" />
+    <NavigationProperty Name="Order" Relationship="TaskDBModel.FK_OrderItems_Order" FromRole="OrderItems" ToRole="Order" />
+  </EntityType>
+  <EntityContainer Name="TaskDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="OrderItems" EntityType="Self.OrderItems" />
+    <EntitySet Name="Unit" EntityType="TaskDBModel.Unit" />
+    <AssociationSet Name="FK_Unit_Unit" Association="TaskDBModel.FK_Unit_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Unit1" EntitySet="Unit" />
+    </AssociationSet>
+    <EntitySet Name="Item" EntityType="TaskDBModel.Item" />
+    <AssociationSet Name="FK_Item_Categories" Association="TaskDBModel.FK_Item_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_Unit" Association="TaskDBModel.FK_Item_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderItems_Item" Association="TaskDBModel.FK_OrderItems_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="OrderItems" EntitySet="OrderItems" />
+    </AssociationSet>
+    <EntitySet Name="Order" EntityType="TaskDBModel.Order" />
+    <AssociationSet Name="FK_OrderItems_Order" Association="TaskDBModel.FK_OrderItems_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderItems" EntitySet="OrderItems" />
+    </AssociationSet>
+    <EntitySet Name="AspNetUsers" EntityType="TaskDBModel.AspNetUsers" />
+  </EntityContainer>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="UnitID" />
+    </Key>
+    <Property Name="UnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Unit1" Relationship="TaskDBModel.FK_Unit_Unit" FromRole="Unit" ToRole="Unit1" />
+    <NavigationProperty Name="Unit2" Relationship="TaskDBModel.FK_Unit_Unit" FromRole="Unit1" ToRole="Unit" />
+    <NavigationProperty Name="Item" Relationship="TaskDBModel.FK_Item_Unit" FromRole="Unit" ToRole="Item" />
+  </EntityType>
+  <Association Name="FK_Unit_Unit">
+    <End Type="TaskDBModel.Unit" Role="Unit" Multiplicity="1" />
+    <End Type="TaskDBModel.Unit" Role="Unit1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Unit1">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsAvailable" Type="Boolean" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitID" Type="Int32" />
+    <Property Name="ItemImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CatID" Type="Int32" />
+    <Property Name="CreateUserID" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiyUserID" Type="Int32" />
+    <Property Name="ModifiyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SalePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Categories" Relationship="TaskDBModel.FK_Item_Categories" FromRole="Item" ToRole="Categories" />
+    <NavigationProperty Name="Unit" Relationship="TaskDBModel.FK_Item_Unit" FromRole="Item" ToRole="Unit" />
+    <NavigationProperty Name="OrderItems" Relationship="TaskDBModel.FK_OrderItems_Item" FromRole="Item" ToRole="OrderItems" />
+  </EntityType>
+  <Association Name="FK_Item_Categories">
+    <End Type="TaskDBModel.Categories" Role="Categories" Multiplicity="0..1" />
+    <End Type="TaskDBModel.Item" Role="Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CatID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="CatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_Unit">
+    <End Type="TaskDBModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="TaskDBModel.Item" Role="Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderItems_Item">
+    <End Type="TaskDBModel.Item" Role="Item" Multiplicity="1" />
+    <End Type="TaskDBModel.OrderItems" Role="OrderItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="OrderItems">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderNum" Type="Int64" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IsDone" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderItems" Relationship="TaskDBModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItems" />
+  </EntityType>
+  <Association Name="FK_OrderItems_Order">
+    <End Type="TaskDBModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="TaskDBModel.OrderItems" Role="OrderItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderItems">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

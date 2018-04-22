@@ -1,0 +1,8 @@
+C:\Users\good_\Source\Repos\Task\BL\bin\DL.dll.config
+C:\Users\good_\Source\Repos\Task\BL\bin\DL.dll
+C:\Users\good_\Source\Repos\Task\BL\bin\DL.pdb
+C:\Users\good_\Source\Repos\Task\DL\obj\Debug\DL.csproj.CoreCompileInputs.cache
+C:\Users\good_\Source\Repos\Task\DL\obj\Debug\DL.csproj.CopyComplete
+C:\Users\good_\Source\Repos\Task\DL\obj\Debug\DL.dll
+C:\Users\good_\Source\Repos\Task\DL\obj\Debug\DL.pdb
+C:\Users\good_\Source\Repos\Task\DL\obj\Debug\DL.csprojResolveAssemblyReference.cache

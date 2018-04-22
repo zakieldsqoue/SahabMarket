@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <title>@ViewBag.Title - Sahab Grocery</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/dx")
+</head>
+<body >
+
+
+
+    <!-- header -->
+    <div class="agileits_header">
+        <div class="w3l_offers">
+            <a href="#">Today's special Offers !</a>
+        </div>
+        <div class="w3l_search">
+            <form action="#" method="post">
+                <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+                <input type="submit" value=" ">
+            </form>
+        </div>
+        <div class="product_list_header">
+            <form action="#" method="post" class="last">
+                <fieldset>
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="display" value="1" />
+                    <input type="submit" name="submit" value="View your cart" class="button" />
+                </fieldset>
+            </form>
+        </div>
+        <div class="w3l_header_right">
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div class="w3l_header_right1">
+            <h2>@Html.ActionLink("Contact US", "Contact", "Home")</h2>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="/"><span>Sahab Grocery</span> Store</a></h1>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                    <li>@Html.ActionLink("Home", "Index", "Home")<i>/</i></li>
+                    <li>@Html.ActionLink("About", "About", "Home")<i>/</i></li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (TempData["FarmsMenuShow"] != null && TempData["FarmsMenuShow"].ToString()== "Yes")
+                        {
+
+
+                <li>@Html.ActionLink("Items", "Index", "items")<i>/</i></li>}
+                    }
+                </ul>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="phone_email">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+966) 540 512 950 </li>
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="market.sahab@gmail.com">market.sahab@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a><span>|</span></li>
+                <li>
+                    @ViewBag.Title
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_left">
+            <nav class="navbar nav_bottom">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav nav_1" id="Menu"></ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+        <div class="w3l_banner_nav_right">
+            @RenderBody()
+
+
+
+
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="footer">
+        <div class="container">
+
+            <div class="clearfix"> </div>
+            <div class="agile_footer_grids">
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h4>100% secure payments</h4>
+                        <img src="/images/card.png" alt=" " class="img-responsive" />
+                    </div>
+                </div>
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h5>connect with us</h5>
+                        <ul class="agileits_social_icons">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="wthree_footer_copy">
+                <p>© 2018 Grocery Store. All rights reserved | Developed by <a href="http://w3layouts.com/">Zaki Eldsoque</a></p>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="APIURL" value="@System.Configuration.ConfigurationManager.AppSettings["APIURL"].ToString()" />
+    @Scripts.Render("~/bundles/minicart")
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <input type="hidden" id="UserName" value="@User.Identity.Name" />
+      
+    }
+
+</body>
+</html>
+
+
+
+
+
+
